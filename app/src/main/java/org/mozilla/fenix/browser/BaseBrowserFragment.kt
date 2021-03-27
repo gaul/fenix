@@ -38,6 +38,7 @@ import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mozilla.appservices.places.BookmarkRoot
+import mozilla.components.browser.engine.gecko.GeckoEngineView
 import mozilla.components.browser.state.action.ContentAction
 import mozilla.components.browser.state.selector.findCustomTab
 import mozilla.components.browser.state.selector.findCustomTabOrSelectedTab
@@ -714,6 +715,8 @@ abstract class BaseBrowserFragment : Fragment(), UserInteractionHandler, Activit
         )
 
         initializeEngineView(toolbarHeight)
+
+        (view.engineView as GeckoEngineView).dispatchKeyHandler = FenixDispatchKeyHandler(context.components)
     }
 
     @VisibleForTesting
